@@ -1,4 +1,4 @@
-module my-app
+module imageViewer
 
 go 1.17
 
