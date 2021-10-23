@@ -7,6 +7,7 @@ import (
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
+	"fyne.io/fyne/v2/dialog"
 )
 
 var count int =1;
@@ -32,9 +33,22 @@ func main() {
 	// input.Resize(fyne.NewSize(600,100));
 
 	saveBtn := widget.NewButton("Save text File",func() {
-		
+		saveFileDialog := dialog.NewFileSave(
+			func(uc fyne.URIWriteCloser,_ error){
+				textData := []byte(input.Text);
+
+				uc.Write(textData);
+			},w)
+
+			saveFileDialog.SetFileName("New File"+strconv.Itoa(count-1)+".txt");
+
+			saveFileDialog.Show();
+
 	})
 
+	openBtn :=widget.NewButton("Open text File",func() {
+		openFileDialog := 
+	})
 
 
 	w.SetContent(
