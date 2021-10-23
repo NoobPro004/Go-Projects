@@ -14,8 +14,8 @@ import(
 func main() {
 	a := app.New()
 	w := a.NewWindow("Hello")
-	w.Resize(fyne.newSize(800,600));
-	root_src:="E:\\C-Drive Items-2\\Pictures\\Screenshots";
+	w.Resize(fyne.NewSize(800,600));
+	root_src:="C:\\Users\\Unknown\\OneDrive\\Desktop";
 
 	files, err := ioutil.ReadDir(root_src);
 
@@ -43,7 +43,7 @@ func main() {
 
 
 	tabs.SetTabLocation(container.TabLocationLeading)
-	w.setContent(tabs);
+	w.SetContent(tabs);
 	w.ShowAndRun()
 }
 
