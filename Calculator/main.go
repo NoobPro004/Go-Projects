@@ -2,6 +2,8 @@ package main
 
 import (
 	"strconv"
+
+	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
@@ -24,7 +26,7 @@ var historyArr [] string;
 
 historyBtn:=widget.NewButton("History",func() {
 	if isHistory{
-		history="";
+		historyStr="";
 	}else{
 		for i:=len(historyArr)-1;i>=0;i--{
 			historyStr=historyStr+historyArr[i];
@@ -33,7 +35,7 @@ historyBtn:=widget.NewButton("History",func() {
 		
 	}
 	isHistory=!isHistory;
-	history.setText(historyStr);
+	history.SetText(historyStr);
 	
 })
 
