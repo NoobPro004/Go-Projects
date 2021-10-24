@@ -1,13 +1,15 @@
 package main
 
 import (
+	"io/ioutil"
 	"strconv"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/widget"
 	"fyne.io/fyne/v2/dialog"
+	"fyne.io/fyne/v2/storage"
+	"fyne.io/fyne/v2/widget"
 )
 
 var count int =1;
@@ -47,7 +49,31 @@ func main() {
 	})
 
 	openBtn :=widget.NewButton("Open text File",func() {
-		openFileDialog := 
+		openFileDialog := dialog.NewFileOpen(
+			func(r fyne.URIReadCloser,_ error){
+				ReadData ,_ := ioutil.ReadAll(r);
+
+
+				output := fyne.NewStaticResource("New File" , ReadData);
+
+				viewData := widget.NewMultiLineEntry();
+
+				viewData.SetText(string(output.StaticContent));
+
+				w := fyne.CurrentApp().NewWindow(
+					string(output.StaticName))
+
+					w.SetContent(container.NewScroll(viewData));
+
+					w.Resize(fyne.NewSize(500,500));
+
+					w.Show();
+			},w)
+
+			openFileDialog.SetFilter(storage.NewExtensionFileFilter([]string{".txt"}))
+			
+
+			openFileDialog.Show();
 	})
 
 
@@ -57,6 +83,7 @@ func main() {
 			input,
 			container.NewHBox(
 				saveBtn,
+				openBtn,
 			),
 		),
 
